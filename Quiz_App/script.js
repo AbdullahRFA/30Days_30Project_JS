@@ -84,7 +84,8 @@ const questions = [
     ],
   },
   {
-    question: "Which of the following is a valid way to add comments in JavaScript?",
+    question:
+      "Which of the following is a valid way to add comments in JavaScript?",
     answers: [
       {
         text: "// This is a comment",
@@ -189,7 +190,8 @@ const questions = [
     ],
   },
   {
-    question: "Which CSS property is used to create space inside an element, between the content and the border?",
+    question:
+      "Which CSS property is used to create space inside an element, between the content and the border?",
     answers: [
       {
         text: "padding",
@@ -211,88 +213,125 @@ const questions = [
   },
 ];
 
-const questionElement = document.getElementById("question")
-const answerButton = document.getElementById("answer-button")
-const nextButton = document.getElementById("next-btn")
+const questionElement = document.getElementById("question");
+const answerButton = document.getElementById("answer-button");
+const nextButton = document.getElementById("next-btn");
 
 let currentQuestionIndex = 0;
 let score = 0;
 
-function startQuiz(){
-    currentQuestionIndex = 0;
-    score = 0;
-    nextButton.innerHTML = "Next";
-    showQuestion();
-}
 
-function showQuestion(){
-    resetSate();
-    let currentQuestion = questions[currentQuestionIndex];
-    let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML= questionNo + ". "+ currentQuestion.question;
+let timerElement = document.getElementById("timer");
+let timeLeft = 10; // Set the time limit for each question
+let timerInterval; // To store the interval ID
 
-    currentQuestion.answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.innerHTML = answer.text;
-        button.classList.add("btn");
-        answerButton.appendChild(button);
-        if(answer.correct){
-          button.dataset.correct = answer.correct;
-        }
-        button.addEventListener("click",selectAnswer);
-    });
-
-}
-function resetSate(){
-    nextButton.style.display = "none";
-    while(answerButton.firstChild){
-        answerButton.removeChild(answerButton.firstChild);
+function startTimer() {
+  timeLeft = 10; // Reset the time for each question
+  timerElement.innerHTML = `Time Left: ${timeLeft}s`;
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timerElement.innerHTML = `Time Left: ${timeLeft}s`;
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval); // Stop the timer
+      handleTimeout(); // Handle when time runs out
     }
+  }, 1000); // Update every second
 }
-function selectAnswer(e){
+
+function stopTimer() {
+  clearInterval(timerInterval); // Stop the timer
+}
+
+function handleTimeout() {
+  // Disable all buttons and show the correct answer
+  Array.from(answerButton.children).forEach((button) => {
+    if (button.dataset.correct === "true") {
+      button.classList.add("correct");
+    }
+    button.disabled = true;
+  });
+  nextButton.style.display = "block"; // Show the Next button
+}
+
+
+function startQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  timerElement.style.display = "block"; // Show the timer
+  nextButton.innerHTML = "Next";
+  showQuestion();
+}
+
+
+function showQuestion() {
+  resetSate();
+  let currentQuestion = questions[currentQuestionIndex];
+  let questionNo = currentQuestionIndex + 1;
+  questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+
+  currentQuestion.answers.forEach((answer) => {
+    const button = document.createElement("button");
+    button.innerHTML = answer.text;
+    button.classList.add("btn");
+    answerButton.appendChild(button);
+    if (answer.correct) {
+      button.dataset.correct = answer.correct;
+    }
+    button.addEventListener("click", (e) => {
+      stopTimer(); // Stop the timer when an answer is selected
+      selectAnswer(e);
+    });
+  });
+
+  startTimer(); // Start the timer for the current question
+}
+function resetSate() {
+  nextButton.style.display = "none";
+  while (answerButton.firstChild) {
+    answerButton.removeChild(answerButton.firstChild);
+  }
+}
+function selectAnswer(e) {
   const selectedBtn = e.target;
   const isCorrect = selectedBtn.dataset.correct === "true";
-  if(isCorrect){
+  if (isCorrect) {
     selectedBtn.classList.add("correct");
     score++;
-  }else{
+  } else {
     selectedBtn.classList.add("incorrect");
   }
-  
-  Array.from(answerButton.children).forEach(button => {
-    if(button.dataset.correct === "true"){
-      button.classList.add("correct")
+
+  Array.from(answerButton.children).forEach((button) => {
+    if (button.dataset.correct === "true") {
+      button.classList.add("correct");
     }
     button.disabled = true;
   });
   nextButton.style.display = "block";
 }
 
-function showScore(){
+function showScore() {
   resetSate();
+  timerElement.style.display = "none"; // Hide the timer when the quiz ends
   questionElement.innerHTML = `Your scored ${score} out of ${questions.length}!`;
   nextButton.innerHTML = "Play Again";
   nextButton.style.display = "block";
 }
 
-function handleNextButton(){
+function handleNextButton() {
   currentQuestionIndex ++;
-  if( currentQuestionIndex < questions.length){
+  if (currentQuestionIndex < questions.length) {
     showQuestion();
-  }
-  else{
+  } else {
     showScore();
   }
 }
-nextButton.addEventListener("click", ()=>{
-  if(currentQuestionIndex < questions.length){
+nextButton.addEventListener("click", () => {
+  if (currentQuestionIndex < questions.length) {
     handleNextButton();
-  }
-  else{
+  } else {
     startQuiz();
   }
 });
 
-
-
-startQuiz()
+startQuiz();
