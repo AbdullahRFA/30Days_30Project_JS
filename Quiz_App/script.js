@@ -1,89 +1,214 @@
 const questions = [
   {
-    question: "Which is the largest animal in the world?",
+    question: "What does HTML stand for?",
     answers: [
-        {
-          text: "Shark",
-          correct: false,
-        },
-        {
-          text: "Blue Whale",
-          correct: true,
-        },
-        {
-          text: "Elephant",
-          correct: false,
-        },
-        {
-          text: "Giraffe",
-          correct: false,
-        },
+      {
+        text: "Hyper Text Markup Language",
+        correct: true,
+      },
+      {
+        text: "High Text Machine Language",
+        correct: false,
+      },
+      {
+        text: "Hyper Text Machine Learning",
+        correct: false,
+      },
+      {
+        text: "Hyper Text Marking Language",
+        correct: false,
+      },
     ],
   },
   {
-    question: "Which is the smallest country in the world?",
+    question: "What is the purpose of the `alt` attribute in an `<img>` tag?",
     answers: [
-        {
-          text: "Vatican City",
-          correct: true,
-        },
-        {
-          text: "Bhutan",
-          correct: false,
-        },
-        {
-          text: "Nepal",
-          correct: false,
-        },
-        {
-          text: "Shri Lanka",
-          correct: false,
-        },
+      {
+        text: "To specify the URL of the image",
+        correct: false,
+      },
+      {
+        text: "To provide alternative text for the image",
+        correct: true,
+      },
+      {
+        text: "To align the image",
+        correct: false,
+      },
+      {
+        text: "To style the image with CSS",
+        correct: false,
+      },
     ],
   },
   {
-    question: "Which is the largest desert in the world?",
+    question: "Which CSS property is used to change the text color?",
     answers: [
-        {
-          text: "Kalahari",
-          correct: false,
-        },
-        {
-          text: "Gobi",
-          correct: false,
-        },
-        {
-          text: "Sahara",
-          correct: false,
-        },
-        {
-          text: "Antarctica",
-          correct: true,
-        },
+      {
+        text: "color",
+        correct: true,
+      },
+      {
+        text: "font-color",
+        correct: false,
+      },
+      {
+        text: "text-color",
+        correct: false,
+      },
+      {
+        text: "background-color",
+        correct: false,
+      },
     ],
   },
   {
-    question: "Which is the smallest continent in the world?",
+    question: "Which is the correct JavaScript syntax to write 'Hello World'?",
     answers: [
-        {
-          text: "Asia",
-          correct: false,
-        },
-        {
-          text: "Australia",
-          correct: true,
-        },
-        {
-          text: "Arctic",
-          correct: false,
-        },
-        {
-          text: "Africa",
-          correct: false,
-        },
+      {
+        text: "print('Hello World');",
+        correct: false,
+      },
+      {
+        text: "document.write('Hello World');",
+        correct: true,
+      },
+      {
+        text: "echo('Hello World');",
+        correct: false,
+      },
+      {
+        text: "console.print('Hello World');",
+        correct: false,
+      },
     ],
   },
-  
+  {
+    question: "Which of the following is a valid way to add comments in JavaScript?",
+    answers: [
+      {
+        text: "// This is a comment",
+        correct: true,
+      },
+      {
+        text: "/* This is a comment */",
+        correct: true,
+      },
+      {
+        text: "# This is a comment",
+        correct: false,
+      },
+      {
+        text: "!-- This is a comment --",
+        correct: false,
+      },
+    ],
+  },
+  {
+    question: "Which CSS property controls the layout of elements?",
+    answers: [
+      {
+        text: "display",
+        correct: true,
+      },
+      {
+        text: "position",
+        correct: false,
+      },
+      {
+        text: "float",
+        correct: false,
+      },
+      {
+        text: "visibility",
+        correct: false,
+      },
+    ],
+  },
+  {
+    question: "How do you declare a JavaScript variable?",
+    answers: [
+      {
+        text: "let myVariable;",
+        correct: true,
+      },
+      {
+        text: "var = myVariable;",
+        correct: false,
+      },
+      {
+        text: "variable myVariable;",
+        correct: false,
+      },
+      {
+        text: "myVariable: var;",
+        correct: false,
+      },
+    ],
+  },
+  {
+    question: "What is the purpose of the <head> tag in HTML?",
+    answers: [
+      {
+        text: "To contain meta information about the document",
+        correct: true,
+      },
+      {
+        text: "To display the title of the page",
+        correct: false,
+      },
+      {
+        text: "To include the main content of the page",
+        correct: false,
+      },
+      {
+        text: "To declare the doctype",
+        correct: false,
+      },
+    ],
+  },
+  {
+    question: "Which JavaScript method is used to find an HTML element by ID?",
+    answers: [
+      {
+        text: "document.getElementById",
+        correct: true,
+      },
+      {
+        text: "document.getElementsById",
+        correct: false,
+      },
+      {
+        text: "document.querySelector",
+        correct: false,
+      },
+      {
+        text: "document.getElement",
+        correct: false,
+      },
+    ],
+  },
+  {
+    question: "Which CSS property is used to create space inside an element, between the content and the border?",
+    answers: [
+      {
+        text: "padding",
+        correct: true,
+      },
+      {
+        text: "margin",
+        correct: false,
+      },
+      {
+        text: "border-spacing",
+        correct: false,
+      },
+      {
+        text: "spacing",
+        correct: false,
+      },
+    ],
+  },
 ];
 
 const questionElement = document.getElementById("question")
